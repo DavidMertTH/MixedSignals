@@ -50,6 +50,28 @@ Responsibilities:
 - Replace previous imports safely
 - Release object URLs on clear and unmount
 
+## Video Preview
+
+The video preview module lives in `src/ui/video-preview`.
+
+### `VideoPreview`
+
+Responsibilities:
+
+- Render the imported video in the central preview stage
+- Show preview metadata
+- Provide custom playback controls
+- Provide scrubbing, restart, and mute actions
+
+### `useVideoPreview`
+
+Responsibilities:
+
+- Own the preview video element reference
+- Track current time, duration, mute state, and playback state
+- Reset preview state when the imported video changes
+- Expose small control actions for the preview UI
+
 ## Future APIs
 
 Expected future core APIs:

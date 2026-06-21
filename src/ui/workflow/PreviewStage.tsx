@@ -1,6 +1,5 @@
-import { Play } from "lucide-react";
 import type { VideoImportState } from "../../core/video-import/videoImportTypes";
-import { formatVideoDuration, formatVideoResolution } from "../video-import/videoFormatters";
+import { VideoPreview } from "../video-preview/VideoPreview";
 
 type PreviewStageProps = {
   videoImportState: VideoImportState;
@@ -17,28 +16,8 @@ export function PreviewStage({ videoImportState }: PreviewStageProps) {
           <p className="panelLabel">Preview</p>
           <h2 id="preview-title">{previewTitle}</h2>
         </div>
-        <button className="roundButton" type="button" aria-label="Start preview" disabled={!importedVideo}>
-          <Play size={20} aria-hidden="true" />
-        </button>
       </div>
-      <div className="signalFrame">
-        {importedVideo ? (
-          <>
-            <video className="previewVideo" src={importedVideo.objectUrl} controls />
-            <div className="previewMetadata">
-              <span>{formatVideoDuration(importedVideo.duration)}</span>
-              <span>{formatVideoResolution(importedVideo.width, importedVideo.height)}</span>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="signalBand signalBand-one" />
-            <div className="signalBand signalBand-two" />
-            <div className="signalBand signalBand-three" />
-            <span>Preview appears after import</span>
-          </>
-        )}
-      </div>
+      <VideoPreview importedVideo={importedVideo} />
     </section>
   );
 }
