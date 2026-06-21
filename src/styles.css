@@ -1,27 +1,28 @@
 :root {
-  color: #17201c;
-  background: #f3f1ec;
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  color-scheme: dark;
+  color: #d9d9d9;
+  background: #121212;
+  font-family: ui-monospace, SFMono-Regular, "Cascadia Mono", "Roboto Mono", Consolas, monospace;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --page: #f3f1ec;
-  --panel: #ffffff;
-  --ink: #17201c;
-  --muted: #68736d;
-  --line: #d9d7cf;
-  --accent: #2f6f65;
-  --accent-strong: #194f49;
-  --amber: #d99229;
-  --coral: #d95f4a;
-  --violet: #5b5c99;
+  --background: #121212;
+  --surface: rgba(20, 20, 20, 0.94);
+  --panel: #1d1d1d;
+  --field: #252525;
+  --field-soft: rgba(255, 255, 255, 0.055);
+  --line: rgba(255, 255, 255, 0.32);
+  --line-soft: rgba(255, 255, 255, 0.14);
+  --text: #d9d9d9;
+  --muted: rgba(217, 217, 217, 0.68);
+  --dim: rgba(217, 217, 217, 0.42);
+  --orange: #ff8a00;
+  --orange-soft: rgba(255, 138, 0, 0.18);
+  --green: #00b66f;
+  --red: #ff315f;
+  --violet: #5b22e5;
+  --grid: rgba(255, 255, 255, 0.105);
+  --grid-soft: rgba(255, 255, 255, 0.055);
 }
 
 * {
@@ -32,70 +33,99 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: var(--page);
+  background:
+    linear-gradient(var(--grid-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-soft) 1px, transparent 1px),
+    var(--background);
+  background-size: 72px 72px;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  content: "";
+  opacity: 0.24;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px),
+    radial-gradient(circle at 67% 58%, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px);
+  background-size: 19px 19px, 23px 23px;
 }
 
 button {
   font: inherit;
+  color: var(--text);
+  cursor: default;
 }
 
 .appShell {
+  position: relative;
+  z-index: 1;
   width: min(1440px, 100%);
   min-height: 100vh;
   margin: 0 auto;
-  padding: 24px;
+  padding: 16px;
 }
 
 .appHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
   gap: 16px;
-  padding: 12px 0 28px;
+  align-items: start;
+  min-height: 78px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .appHeader h1 {
+  width: min-content;
   margin: 0;
-  font-size: clamp(2.25rem, 7vw, 4.75rem);
+  color: var(--text);
+  font-size: clamp(2.3rem, 6vw, 4.25rem);
+  font-weight: 900;
   line-height: 0.95;
   letter-spacing: 0;
 }
 
 .eyebrow,
 .panelLabel {
-  margin: 0 0 8px;
-  color: var(--accent-strong);
+  margin: 0 0 6px;
+  color: var(--muted);
   font-size: 0.78rem;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .workflowLayout {
   display: grid;
-  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-  gap: 20px;
+  grid-template-columns: minmax(230px, 286px) minmax(0, 1fr);
+  gap: 16px;
+  padding-top: 12px;
 }
 
 .guidePanel,
 .toolPanel,
 .timelinePanel,
 .previewStage {
-  background: var(--panel);
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
+  background: var(--surface);
 }
 
 .guidePanel {
   align-self: start;
-  padding: 18px;
+  padding: 16px;
   position: sticky;
-  top: 24px;
+  top: 16px;
 }
 
 .stepList {
   display: grid;
-  gap: 12px;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -103,7 +133,7 @@ button {
 
 .stepItem {
   display: grid;
-  grid-template-columns: 28px 1fr;
+  grid-template-columns: 28px minmax(0, 1fr);
   gap: 10px;
   color: var(--muted);
 }
@@ -114,13 +144,13 @@ button {
 }
 
 .stepItem strong {
-  color: var(--ink);
-  font-size: 0.95rem;
+  color: var(--text);
+  font-size: 0.92rem;
 }
 
 .stepItem span span {
-  margin-top: 4px;
-  font-size: 0.84rem;
+  margin-top: 3px;
+  font-size: 0.78rem;
   line-height: 1.35;
 }
 
@@ -129,14 +159,16 @@ button {
   width: 28px;
   height: 28px;
   place-items: center;
+  border: 1px solid var(--line-soft);
   border-radius: 999px;
-  background: #eef5f3;
-  color: var(--accent);
+  background: var(--field);
+  color: var(--muted);
 }
 
 .stepItem-active .stepMarker {
-  background: var(--accent);
-  color: #ffffff;
+  border-color: var(--orange);
+  background: var(--orange-soft);
+  color: var(--orange);
 }
 
 .workspaceGrid {
@@ -145,7 +177,7 @@ button {
   grid-template-areas:
     "upload preview effects"
     "timeline timeline export";
-  gap: 16px;
+  gap: 12px;
 }
 
 .uploadPanel {
@@ -169,21 +201,27 @@ button {
 }
 
 .toolPanel,
-.timelinePanel {
-  padding: 18px;
+.timelinePanel,
+.previewStage {
+  padding: 14px;
 }
 
 .panelHeading {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 9px;
+  min-height: 28px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .panelHeading h2,
 .previewHeader h2 {
   margin: 0;
-  font-size: 1rem;
+  color: var(--text);
+  font-size: 0.96rem;
+  font-weight: 900;
   letter-spacing: 0;
 }
 
@@ -193,16 +231,20 @@ button {
   place-items: center;
   align-content: center;
   gap: 8px;
-  padding: 24px;
-  border: 1px dashed #9fa8a2;
+  padding: 22px;
+  border: 1px dashed var(--line);
   border-radius: 8px;
-  background: #f8f7f3;
+  background:
+    linear-gradient(var(--grid-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-soft) 1px, transparent 1px),
+    var(--field-soft);
+  background-size: 32px 32px;
   color: var(--muted);
   text-align: center;
 }
 
 .dropZone strong {
-  color: var(--ink);
+  color: var(--text);
 }
 
 .primaryButton,
@@ -210,49 +252,46 @@ button {
 .iconButton,
 .roundButton,
 .presetItem {
-  border: 0;
-  cursor: default;
+  border: 1px solid var(--line);
+  background: var(--field);
 }
 
 .primaryButton,
 .secondaryButton {
   display: inline-flex;
   width: 100%;
-  min-height: 44px;
+  min-height: 36px;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-top: 14px;
-  border-radius: 8px;
-  font-weight: 800;
+  margin-top: 12px;
+  border-radius: 999px;
+  font-weight: 900;
 }
 
 .primaryButton {
-  background: var(--accent);
-  color: #ffffff;
+  border-color: color-mix(in srgb, var(--orange) 76%, var(--line));
+  background: var(--orange-soft);
+  color: var(--text);
 }
 
 .secondaryButton {
-  background: #eef1ee;
-  color: var(--ink);
+  color: var(--muted);
 }
 
 .iconButton,
 .roundButton {
   display: grid;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   flex: 0 0 auto;
   place-items: center;
   border-radius: 999px;
-  background: #ffffff;
-  color: var(--accent-strong);
-  border: 1px solid var(--line);
+  color: var(--orange);
 }
 
 .previewStage {
-  min-height: 420px;
-  padding: 18px;
+  min-height: 410px;
 }
 
 .previewHeader {
@@ -260,76 +299,86 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .signalFrame {
   position: relative;
   display: grid;
-  min-height: 330px;
+  min-height: 320px;
   overflow: hidden;
   place-items: center;
+  border: 1px solid var(--line-soft);
   border-radius: 8px;
   background:
-    linear-gradient(90deg, rgba(23, 32, 28, 0.92), rgba(47, 111, 101, 0.68)),
-    repeating-linear-gradient(0deg, #1b2a27 0 12px, #253733 12px 24px);
-  color: #ffffff;
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    #171717;
+  background-size: 56px 44px;
+  color: var(--text);
 }
 
 .signalFrame span {
   position: relative;
   z-index: 2;
-  padding: 10px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.28);
-  font-weight: 800;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(18, 18, 18, 0.78);
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 900;
 }
 
 .signalBand {
   position: absolute;
   left: -8%;
   width: 116%;
-  height: 64px;
+  height: 56px;
   opacity: 0.82;
   mix-blend-mode: screen;
 }
 
 .signalBand-one {
   top: 22%;
-  background: repeating-linear-gradient(90deg, var(--coral) 0 18px, transparent 18px 34px);
+  background: repeating-linear-gradient(90deg, var(--orange) 0 18px, transparent 18px 34px);
 }
 
 .signalBand-two {
   top: 45%;
-  background: repeating-linear-gradient(90deg, var(--amber) 0 10px, transparent 10px 28px);
+  background: repeating-linear-gradient(90deg, var(--violet) 0 10px, transparent 10px 28px);
   transform: skewY(-3deg);
 }
 
 .signalBand-three {
   top: 62%;
-  background: repeating-linear-gradient(90deg, var(--violet) 0 24px, transparent 24px 40px);
+  background: repeating-linear-gradient(90deg, var(--red) 0 24px, transparent 24px 40px);
   transform: skewY(2deg);
 }
 
 .presetList {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .presetItem {
   display: flex;
   width: 100%;
-  min-height: 74px;
+  min-height: 72px;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px;
-  border: 1px solid var(--line);
+  padding: 10px;
   border-radius: 8px;
-  background: #ffffff;
-  color: var(--ink);
+  color: var(--text);
   text-align: left;
+}
+
+.presetItem:first-child {
+  border-color: color-mix(in srgb, var(--orange) 72%, var(--line));
+  background: var(--orange-soft);
 }
 
 .presetItem strong,
@@ -345,37 +394,38 @@ button {
 
 .presetItem em {
   flex: 0 0 auto;
-  color: var(--accent-strong);
-  font-size: 0.76rem;
+  color: var(--orange);
+  font-size: 0.74rem;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .frameTrack {
   display: grid;
   grid-template-columns: repeat(12, minmax(36px, 1fr));
-  gap: 8px;
+  gap: 7px;
 }
 
 .frameChip {
   display: grid;
-  min-height: 48px;
+  min-height: 46px;
   place-items: center;
+  border: 1px solid var(--line-soft);
   border-radius: 6px;
   color: #ffffff;
   font-weight: 900;
 }
 
 .frameChip-I {
-  background: var(--coral);
+  background: var(--orange);
 }
 
 .frameChip-P {
-  background: var(--accent);
+  background: var(--violet);
 }
 
 .frameChip-B {
-  background: var(--violet);
+  background: var(--red);
 }
 
 .exportRows {
@@ -386,7 +436,7 @@ button {
 }
 
 .exportRows strong {
-  color: var(--ink);
+  color: var(--text);
 }
 
 @media (max-width: 1120px) {
@@ -399,7 +449,7 @@ button {
   }
 
   .stepList {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .workspaceGrid {
@@ -414,11 +464,11 @@ button {
 
 @media (max-width: 720px) {
   .appShell {
-    padding: 16px;
+    padding: 10px;
   }
 
   .appHeader {
-    align-items: flex-start;
+    min-height: 62px;
   }
 
   .stepList,
