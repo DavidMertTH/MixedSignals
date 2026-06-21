@@ -37,15 +37,15 @@ export class VideoImportService {
 
   private validateFile(file: File) {
     if (!file.type.startsWith("video/")) {
-      throw new Error("Bitte eine Videodatei importieren.");
+      throw new Error("Please import a video file.");
     }
 
     if (file.type && !acceptedVideoMimeTypes.includes(file.type)) {
-      throw new Error("Unterstuetzt werden MP4, MOV und WebM.");
+      throw new Error("Supported formats are MP4, MOV, and WebM.");
     }
 
     if (file.size > maximumVideoFileSize) {
-      throw new Error("Die Datei ist groesser als 1 GB.");
+      throw new Error("The file is larger than 1 GB.");
     }
   }
 
@@ -65,7 +65,7 @@ export class VideoImportService {
         });
       };
 
-      videoElement.onerror = () => reject(new Error("Videometadaten konnten nicht gelesen werden."));
+      videoElement.onerror = () => reject(new Error("Video metadata could not be read."));
     });
   }
 

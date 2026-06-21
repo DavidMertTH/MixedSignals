@@ -20,7 +20,7 @@ export function formatVideoFileSize(size: number) {
 
 export function formatVideoResolution(width: number, height: number) {
   if (!width || !height) {
-    return "Unbekannt";
+    return "Unknown";
   }
 
   return `${width} x ${height}`;

@@ -23,3 +23,12 @@ Build the project:
 ```bash
 pnpm build
 ```
+
+## Project Docs
+
+- [Agent guide](AGENTS.md)
+- [Engineering guidelines](docs/engineering-guidelines.md)
+- [Project plan](docs/project-plan.md)
+- [Architecture overview](docs/architecture-overview.md)
+- [API overview](docs/api-overview.md)
+- [Git workflow](docs/git-workflow.md)

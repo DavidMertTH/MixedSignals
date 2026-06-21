@@ -9,7 +9,7 @@ export function AppHeader() {
         <p className="eyebrow">Datamoshing Studio</p>
         <h1>MixedSignals</h1>
       </div>
-      <nav className="topMenu" aria-label="Projektoptionen">
+      <nav className="topMenu" aria-label="Project options">
         {menuItems.map((menuItem) => (
           <button type="button" key={menuItem}>{menuItem}</button>
         ))}

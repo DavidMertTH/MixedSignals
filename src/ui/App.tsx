@@ -12,8 +12,8 @@ export function App() {
   return (
     <main className="appShell">
       <AppHeader />
-      <section className="editorLayout" aria-label="MixedSignals Editor">
-        <aside className="importColumn" aria-label="Import Optionen">
+      <section className="editorLayout" aria-label="MixedSignals editor">
+        <aside className="importColumn" aria-label="Import options">
           <UploadPanel
             videoImportState={videoImportState}
             onVideoSelected={importVideoFile}
@@ -21,10 +21,10 @@ export function App() {
           />
           <ExportPanel importedVideo={videoImportState.video} />
         </aside>
-        <section className="previewColumn" aria-label="Video Vorschau">
+        <section className="previewColumn" aria-label="Video preview">
           <PreviewStage videoImportState={videoImportState} />
         </section>
-        <aside className="effectColumn" aria-label="Effektspalte">
+        <aside className="effectColumn" aria-label="Effect panel">
           <EffectLibrary />
         </aside>
         <section className="timelineColumn" aria-label="Timeline">

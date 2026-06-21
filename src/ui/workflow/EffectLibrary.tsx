@@ -4,18 +4,18 @@ import type { EffectPreset } from "./workflowTypes";
 const effectPresets: EffectPreset[] = [
   {
     name: "Frame Drag",
-    summary: "Bewegung wird in Folgebilder gezogen",
-    intensity: "Mittel",
+    summary: "Motion is dragged into following frames",
+    intensity: "Medium",
   },
   {
     name: "Vector Melt",
-    summary: "Motion-Artefakte werden weich verwischt",
-    intensity: "Hoch",
+    summary: "Motion artifacts smear into soft trails",
+    intensity: "High",
   },
   {
     name: "I-Frame Skip",
-    summary: "Schnittpunkte brechen sichtbar auf",
-    intensity: "Roh",
+    summary: "Cut points break into visible glitches",
+    intensity: "Raw",
   },
 ];
 
@@ -24,7 +24,7 @@ export function EffectLibrary() {
     <section className="toolPanel effectPanel" aria-labelledby="effects-title">
       <div className="panelHeading">
         <Waves size={20} aria-hidden="true" />
-        <h2 id="effects-title">Effekt wählen</h2>
+        <h2 id="effects-title">Choose effect</h2>
       </div>
       <div className="presetList">
         {effectPresets.map((preset) => (
@@ -39,7 +39,7 @@ export function EffectLibrary() {
       </div>
       <button className="secondaryButton" type="button">
         <SlidersHorizontal size={18} aria-hidden="true" />
-        Parameter öffnen
+        Open parameters
       </button>
     </section>
   );

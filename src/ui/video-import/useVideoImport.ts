@@ -41,7 +41,7 @@ export function useVideoImport() {
       setVideoImportState({
         status: "error",
         video: importedVideoRef.current,
-        error: error instanceof Error ? error.message : "Video konnte nicht importiert werden.",
+        error: error instanceof Error ? error.message : "Video could not be imported.",
       });
     }
   }, []);

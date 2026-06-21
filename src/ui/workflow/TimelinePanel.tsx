@@ -21,7 +21,7 @@ export function TimelinePanel({ importedVideo }: TimelinePanelProps) {
           <span>{formatVideoDuration(importedVideo.duration)}</span>
         </div>
       ) : null}
-      <div className="frameTrack" aria-label="Frame-Struktur Vorschau">
+      <div className="frameTrack" aria-label="Frame structure preview">
         {frameGroups.map((frameType, index) => (
           <span className={`frameChip frameChip-${frameType}`} key={`${frameType}-${index}`}>
             {frameType}

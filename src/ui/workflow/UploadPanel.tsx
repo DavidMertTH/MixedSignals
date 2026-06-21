@@ -50,7 +50,7 @@ export function UploadPanel({ videoImportState, onVideoSelected, onVideoCleared 
     <section className="toolPanel uploadPanel" aria-labelledby="upload-title">
       <div className="panelHeading">
         <FileVideo size={20} aria-hidden="true" />
-        <h2 id="upload-title">Video importieren</h2>
+        <h2 id="upload-title">Import video</h2>
       </div>
       <input
         className="fileInput"
@@ -75,17 +75,17 @@ export function UploadPanel({ videoImportState, onVideoSelected, onVideoCleared 
         ) : (
           <>
             {hasImportError ? <AlertCircle size={28} aria-hidden="true" /> : <Upload size={28} aria-hidden="true" />}
-            <strong>{isImportingVideo ? "Import laeuft" : "Datei hier ablegen"}</strong>
-            <span>{videoImportState.error ?? "MP4, MOV oder WebM"}</span>
+            <strong>{isImportingVideo ? "Importing" : "Drop file here"}</strong>
+            <span>{videoImportState.error ?? "MP4, MOV, or WebM"}</span>
           </>
         )}
       </div>
       <div className="importActions">
         <button className="primaryButton" type="button" onClick={openFilePicker} disabled={isImportingVideo}>
-          {isImportingVideo ? "Importiere" : "Video auswaehlen"}
+          {isImportingVideo ? "Importing" : "Choose video"}
         </button>
         {importedVideo ? (
-          <button className="secondaryIconButton" type="button" aria-label="Video entfernen" onClick={onVideoCleared}>
+          <button className="secondaryIconButton" type="button" aria-label="Remove video" onClick={onVideoCleared}>
             <X size={18} aria-hidden="true" />
           </button>
         ) : null}

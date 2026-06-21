@@ -8,16 +8,16 @@ type PreviewStageProps = {
 
 export function PreviewStage({ videoImportState }: PreviewStageProps) {
   const importedVideo = videoImportState.video;
-  const previewTitle = importedVideo?.name ?? "Kein Clip geladen";
+  const previewTitle = importedVideo?.name ?? "No clip loaded";
 
   return (
     <section className="previewStage" aria-labelledby="preview-title">
       <div className="previewHeader">
         <div>
-          <p className="panelLabel">Vorschau</p>
+          <p className="panelLabel">Preview</p>
           <h2 id="preview-title">{previewTitle}</h2>
         </div>
-        <button className="roundButton" type="button" aria-label="Vorschau starten" disabled={!importedVideo}>
+        <button className="roundButton" type="button" aria-label="Start preview" disabled={!importedVideo}>
           <Play size={20} aria-hidden="true" />
         </button>
       </div>
@@ -35,7 +35,7 @@ export function PreviewStage({ videoImportState }: PreviewStageProps) {
             <div className="signalBand signalBand-one" />
             <div className="signalBand signalBand-two" />
             <div className="signalBand signalBand-three" />
-            <span>Preview erscheint nach dem Import</span>
+            <span>Preview appears after import</span>
           </>
         )}
       </div>

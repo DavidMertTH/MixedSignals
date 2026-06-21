@@ -15,14 +15,14 @@ export function ExportPanel({ importedVideo }: ExportPanelProps) {
       <div className="exportRows">
         <span>Format</span>
         <strong>MP4 H.264</strong>
-        <span>Qualitaet</span>
+        <span>Quality</span>
         <strong>Preview</strong>
-        <span>Quelle</span>
-        <strong>{importedVideo ? "bereit" : "leer"}</strong>
+        <span>Source</span>
+        <strong>{importedVideo ? "ready" : "empty"}</strong>
       </div>
       <button className="primaryButton" type="button" disabled={!importedVideo}>
         <Download size={18} aria-hidden="true" />
-        Render vorbereiten
+        Prepare render
       </button>
     </section>
   );
