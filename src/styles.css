@@ -23,6 +23,37 @@
   --violet: #5b22e5;
   --grid: rgba(255, 255, 255, 0.105);
   --grid-soft: rgba(255, 255, 255, 0.055);
+  --noise-one: rgba(255, 255, 255, 0.05);
+  --noise-two: rgba(255, 255, 255, 0.04);
+  --preview-background: #171717;
+  --preview-chip: rgba(18, 18, 18, 0.78);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  color: #141413;
+  background: #fbfbfb;
+  --background: #fbfbfb;
+  --surface: rgba(250, 250, 250, 0.98);
+  --panel: #ffffff;
+  --field: #ffffff;
+  --field-soft: rgba(18, 18, 18, 0.06);
+  --line: rgba(18, 18, 18, 0.56);
+  --line-soft: rgba(18, 18, 18, 0.24);
+  --text: #141413;
+  --muted: rgba(20, 20, 19, 0.72);
+  --dim: rgba(20, 20, 19, 0.54);
+  --orange: #c87900;
+  --orange-soft: rgba(200, 121, 0, 0.14);
+  --green: #008f5a;
+  --red: #c9264c;
+  --violet: #5637c8;
+  --grid: rgba(18, 18, 18, 0.1);
+  --grid-soft: rgba(18, 18, 18, 0.06);
+  --noise-one: rgba(18, 18, 18, 0.055);
+  --noise-two: rgba(18, 18, 18, 0.04);
+  --preview-background: #f6f6f6;
+  --preview-chip: rgba(255, 255, 255, 0.8);
 }
 
 * {
@@ -49,8 +80,8 @@ body::before {
   opacity: 0.24;
   mix-blend-mode: screen;
   background:
-    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px),
-    radial-gradient(circle at 67% 58%, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px);
+    radial-gradient(circle at 18% 22%, var(--noise-one) 0 1px, transparent 1px),
+    radial-gradient(circle at 67% 58%, var(--noise-two) 0 1px, transparent 1px);
   background-size: 19px 19px, 23px 23px;
 }
 
@@ -71,7 +102,7 @@ button {
 
 .appHeader {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 44px;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 16px;
   align-items: start;
   min-height: 78px;
@@ -290,6 +321,47 @@ button {
   color: var(--orange);
 }
 
+.themeSwitcher {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 0;
+  background: var(--field);
+}
+
+.themeSwitcher button {
+  display: grid;
+  width: 38px;
+  min-height: 36px;
+  place-items: center;
+  border: 0;
+  border-left: 1px solid var(--line-soft);
+  background: transparent;
+  color: var(--muted);
+}
+
+.themeSwitcher button:first-child {
+  border-left: 0;
+}
+
+.themeSwitcher button.active {
+  background: var(--orange-soft);
+  color: var(--text);
+}
+
+.themeSwitcher span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .previewStage {
   min-height: 410px;
 }
@@ -315,7 +387,7 @@ button {
   background:
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-    #171717;
+    var(--preview-background);
   background-size: 56px 44px;
   color: var(--text);
 }
@@ -326,7 +398,7 @@ button {
   padding: 8px 12px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(18, 18, 18, 0.78);
+  background: var(--preview-chip);
   color: var(--muted);
   font-size: 0.8rem;
   font-weight: 900;
