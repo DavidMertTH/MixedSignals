@@ -124,9 +124,9 @@ button {
   margin: 0;
   color: var(--text);
   overflow: hidden;
-  font-size: 1.72rem;
-  font-weight: 900;
-  line-height: 1;
+  font-size: 34px;
+  font-weight: 720;
+  line-height: 0.95;
   letter-spacing: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -180,7 +180,16 @@ button {
   font-weight: 900;
 }
 
-.eyebrow,
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+}
+
 .panelLabel {
   margin: 0 0 6px;
   color: var(--muted);
