@@ -1,25 +1,28 @@
 import { AppHeader } from "./layout/AppHeader";
-import { EffectGuide } from "./workflow/EffectGuide";
 import { EffectLibrary } from "./workflow/EffectLibrary";
 import { ExportPanel } from "./workflow/ExportPanel";
 import { PreviewStage } from "./workflow/PreviewStage";
 import { TimelinePanel } from "./workflow/TimelinePanel";
 import { UploadPanel } from "./workflow/UploadPanel";
-import { workflowSteps } from "./workflow/workflowSteps";
 
 export function App() {
   return (
     <main className="appShell">
       <AppHeader />
-      <section className="workflowLayout" aria-label="MixedSignals Workflow">
-        <EffectGuide steps={workflowSteps} />
-        <div className="workspaceGrid">
+      <section className="editorLayout" aria-label="MixedSignals Editor">
+        <aside className="importColumn" aria-label="Import Optionen">
           <UploadPanel />
-          <PreviewStage />
-          <EffectLibrary />
-          <TimelinePanel />
           <ExportPanel />
-        </div>
+        </aside>
+        <section className="previewColumn" aria-label="Video Vorschau">
+          <PreviewStage />
+        </section>
+        <aside className="effectColumn" aria-label="Effektspalte">
+          <EffectLibrary />
+        </aside>
+        <section className="timelineColumn" aria-label="Timeline">
+          <TimelinePanel />
+        </section>
       </section>
     </main>
   );

@@ -60,10 +60,18 @@
   box-sizing: border-box;
 }
 
+html,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   margin: 0;
+  width: 100%;
+  height: 100%;
   min-width: 320px;
-  min-height: 100vh;
+  overflow: hidden;
   background:
     linear-gradient(var(--grid-soft) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-soft) 1px, transparent 1px),
@@ -94,30 +102,82 @@ button {
 .appShell {
   position: relative;
   z-index: 1;
-  width: min(1440px, 100%);
-  min-height: 100vh;
-  margin: 0 auto;
-  padding: 16px;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-rows: 58px minmax(0, 1fr);
+  overflow: hidden;
 }
 
 .appHeader {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 16px;
-  align-items: start;
-  min-height: 78px;
-  padding-bottom: 14px;
+  grid-template-columns: 260px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: stretch;
+  min-height: 0;
+  padding: 0 10px;
   border-bottom: 1px solid var(--line-soft);
+  background: var(--surface);
 }
 
 .appHeader h1 {
-  width: min-content;
   margin: 0;
   color: var(--text);
-  font-size: clamp(2.3rem, 6vw, 4.25rem);
+  overflow: hidden;
+  font-size: 1.72rem;
   font-weight: 900;
-  line-height: 0.95;
+  line-height: 1;
   letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.brandArea {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  border-right: 1px solid var(--line-soft);
+}
+
+.topMenu {
+  display: flex;
+  min-width: 0;
+  align-items: stretch;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.topMenu button {
+  min-width: 102px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.topMenu button:first-child {
+  border-bottom-color: var(--orange);
+  background: linear-gradient(180deg, transparent 52%, var(--orange-soft));
+  color: var(--text);
+}
+
+.headerTools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusButton {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  background: var(--field);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
 }
 
 .eyebrow,
@@ -130,11 +190,16 @@ button {
   text-transform: uppercase;
 }
 
-.workflowLayout {
+.editorLayout {
   display: grid;
-  grid-template-columns: minmax(230px, 286px) minmax(0, 1fr);
-  gap: 16px;
-  padding-top: 12px;
+  grid-template-columns: 292px minmax(0, 1fr) 318px;
+  grid-template-rows: minmax(0, 1fr) 142px;
+  grid-template-areas:
+    "import preview effects"
+    "import timeline effects";
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .guidePanel,
@@ -143,8 +208,39 @@ button {
 .previewStage {
   overflow: hidden;
   border: 1px solid var(--line);
+  border-top: 0;
+  border-left: 0;
   border-radius: 0;
   background: var(--surface);
+}
+
+.importColumn,
+.effectColumn,
+.previewColumn,
+.timelineColumn {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.importColumn {
+  grid-area: import;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  border-right: 1px solid var(--line-soft);
+}
+
+.previewColumn {
+  grid-area: preview;
+}
+
+.effectColumn {
+  grid-area: effects;
+  border-left: 1px solid var(--line-soft);
+}
+
+.timelineColumn {
+  grid-area: timeline;
 }
 
 .guidePanel {
@@ -202,39 +298,54 @@ button {
   color: var(--orange);
 }
 
-.workspaceGrid {
-  display: grid;
-  grid-template-columns: minmax(220px, 320px) minmax(360px, 1fr) minmax(220px, 320px);
-  grid-template-areas:
-    "upload preview effects"
-    "timeline timeline export";
-  gap: 12px;
-}
-
-.uploadPanel {
-  grid-area: upload;
-}
-
-.previewStage {
-  grid-area: preview;
-}
-
-.effectPanel {
-  grid-area: effects;
-}
-
-.timelinePanel {
-  grid-area: timeline;
-}
-
-.exportPanel {
-  grid-area: export;
-}
-
 .toolPanel,
 .timelinePanel,
 .previewStage {
+  width: 100%;
+  height: 100%;
   padding: 14px;
+}
+
+.uploadPanel,
+.effectPanel,
+.exportPanel,
+.timelinePanel,
+.previewStage {
+  display: flex;
+  flex-direction: column;
+}
+
+.uploadPanel,
+.exportPanel {
+  border-right: 0;
+  border-left: 0;
+}
+
+.uploadPanel {
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.exportPanel {
+  min-height: 186px;
+  border-bottom: 0;
+}
+
+.effectPanel {
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.timelinePanel {
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.previewStage {
+  border-right: 0;
 }
 
 .panelHeading {
@@ -258,7 +369,8 @@ button {
 
 .dropZone {
   display: grid;
-  min-height: 180px;
+  flex: 1 1 auto;
+  min-height: 0;
   place-items: center;
   align-content: center;
   gap: 8px;
@@ -363,7 +475,7 @@ button {
 }
 
 .previewStage {
-  min-height: 410px;
+  min-height: 0;
 }
 
 .previewHeader {
@@ -379,7 +491,8 @@ button {
 .signalFrame {
   position: relative;
   display: grid;
-  min-height: 320px;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow: hidden;
   place-items: center;
   border: 1px solid var(--line-soft);
@@ -433,6 +546,7 @@ button {
 .presetList {
   display: grid;
   gap: 8px;
+  overflow: hidden;
 }
 
 .presetItem {
@@ -476,6 +590,7 @@ button {
   display: grid;
   grid-template-columns: repeat(12, minmax(36px, 1fr));
   gap: 7px;
+  margin-top: auto;
 }
 
 .frameChip {
@@ -511,58 +626,44 @@ button {
   color: var(--text);
 }
 
-@media (max-width: 1120px) {
-  .workflowLayout {
-    grid-template-columns: 1fr;
+@media (max-width: 980px) {
+  .appHeader {
+    grid-template-columns: 210px minmax(0, 1fr) auto;
   }
 
-  .guidePanel {
-    position: static;
+  .topMenu button {
+    min-width: 82px;
   }
 
-  .stepList {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .workspaceGrid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-areas:
-      "preview preview"
-      "upload effects"
-      "timeline timeline"
-      "export export";
+  .editorLayout {
+    grid-template-columns: 236px minmax(0, 1fr) 260px;
   }
 }
 
-@media (max-width: 720px) {
-  .appShell {
-    padding: 10px;
-  }
-
+@media (max-width: 760px) {
   .appHeader {
-    min-height: 62px;
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .stepList,
-  .workspaceGrid {
+  .topMenu {
+    display: none;
+  }
+
+  .editorLayout {
     grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) 136px;
+    grid-template-areas:
+      "preview"
+      "timeline";
   }
 
-  .workspaceGrid {
-    grid-template-areas:
-      "upload"
-      "preview"
-      "effects"
-      "timeline"
-      "export";
+  .importColumn,
+  .effectColumn {
+    display: none;
   }
 
   .previewStage {
-    min-height: auto;
-  }
-
-  .signalFrame {
-    min-height: 260px;
+    border-left: 0;
   }
 
   .frameTrack {
