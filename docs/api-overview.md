@@ -72,11 +72,63 @@ Responsibilities:
 - Reset preview state when the imported video changes
 - Expose small control actions for the preview UI
 
+## Timeline
+
+The timeline module lives in `src/core/timeline` and `src/ui/timeline`.
+
+### `TimelineService`
+
+Responsibilities:
+
+- Create the initial timeline state
+- Store video and image assets in a shared model
+- Add imported assets as clips
+- Split the selected clip
+- Move the selected clip left or right
+- Move the selected clip between tracks
+- Keep track and clip operations outside React components
+
+### `TimelineState`
+
+Fields:
+
+- `assets`
+- `tracks`
+- `selectedClipId`
+
+### `TimelineTrack`
+
+Fields:
+
+- `id`
+- `name`
+- `clips`
+
+### `TimelineClip`
+
+Fields:
+
+- `id`
+- `assetId`
+- `kind`
+- `name`
+- `trackId`
+- `startTime`
+- `sourceStartTime`
+- `duration`
+
+### `useTimeline`
+
+Responsibilities:
+
+- Bridge React state to `TimelineService`
+- Add imported videos to the timeline once
+- Expose clip selection, split, move, and track reorder actions
+
 ## Future APIs
 
 Expected future core APIs:
 
-- `TimelineService`
 - `EffectPresetService`
 - `DatamoshRenderService`
 - `ProjectFileService`

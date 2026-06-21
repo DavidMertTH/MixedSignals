@@ -738,23 +738,106 @@ button:disabled {
   font-weight: 900;
 }
 
-.frameTrack {
+.timelineHeading {
+  justify-content: space-between;
+}
+
+.timelineTitle,
+.timelineActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timelineActions button {
   display: grid;
-  grid-template-columns: repeat(12, minmax(36px, 1fr));
-  gap: 7px;
-  margin-top: auto;
+  width: 28px;
+  min-height: 28px;
+  place-items: center;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  background: var(--field);
+  color: var(--muted);
+}
+
+.timelineRuler {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 6px;
+  padding-left: 92px;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.timelineRuler span:nth-child(2) {
+  text-align: center;
+}
+
+.timelineRuler span:last-child {
+  text-align: right;
+}
+
+.timelineTracks {
+  display: grid;
+  flex: 1 1 auto;
+  min-height: 0;
+  gap: 6px;
+}
+
+.timelineTrack {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  gap: 8px;
+  min-height: 30px;
+}
+
+.timelineTrackLabel {
+  display: flex;
+  align-items: center;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timelineTrackLane {
+  position: relative;
+  min-height: 30px;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  background:
+    linear-gradient(90deg, var(--grid-soft) 1px, transparent 1px),
+    var(--field-soft);
+  background-size: 48px 100%;
 }
 
 .timelineClip {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
-  min-height: 34px;
-  margin-bottom: 8px;
-  padding: 0 10px;
+  min-width: 42px;
+  padding: 0 8px;
   border: 1px solid color-mix(in srgb, var(--orange) 72%, var(--line));
+  border-radius: 0;
   background: var(--orange-soft);
+  color: var(--text);
+  text-align: left;
+}
+
+.timelineClip-image {
+  border-color: color-mix(in srgb, var(--green) 72%, var(--line));
+  background: color-mix(in srgb, var(--green) 18%, transparent);
+}
+
+.timelineClip-selected {
+  outline: 2px solid var(--orange);
+  outline-offset: -2px;
 }
 
 .timelineClip strong {
@@ -766,28 +849,16 @@ button:disabled {
 
 .timelineClip span {
   color: var(--muted);
+  font-size: 0.72rem;
 }
 
-.frameChip {
-  display: grid;
-  min-height: 46px;
-  place-items: center;
-  border: 1px solid var(--line-soft);
-  border-radius: 0;
-  color: #ffffff;
-  font-weight: 900;
-}
-
-.frameChip-I {
-  background: var(--orange);
-}
-
-.frameChip-P {
-  background: var(--violet);
-}
-
-.frameChip-B {
-  background: var(--red);
+.timelineEmptyTrack {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding: 0 8px;
+  color: var(--dim);
+  font-size: 0.72rem;
 }
 
 .exportRows {
@@ -841,7 +912,4 @@ button:disabled {
     border-left: 0;
   }
 
-  .frameTrack {
-    grid-template-columns: repeat(6, minmax(36px, 1fr));
-  }
 }

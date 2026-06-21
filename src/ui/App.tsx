@@ -4,10 +4,18 @@ import { ExportPanel } from "./workflow/ExportPanel";
 import { PreviewStage } from "./workflow/PreviewStage";
 import { TimelinePanel } from "./workflow/TimelinePanel";
 import { UploadPanel } from "./workflow/UploadPanel";
+import { useTimeline } from "./timeline/useTimeline";
 import { useVideoImport } from "./video-import/useVideoImport";
 
 export function App() {
   const { videoImportState, importVideoFile, clearImportedVideo } = useVideoImport();
+  const {
+    timelineState,
+    moveSelectedClip,
+    moveSelectedClipToTrack,
+    selectClip,
+    splitSelectedClip,
+  } = useTimeline(videoImportState.video);
 
   return (
     <main className="appShell">
@@ -28,7 +36,13 @@ export function App() {
           <EffectLibrary />
         </aside>
         <section className="timelineColumn" aria-label="Timeline">
-          <TimelinePanel importedVideo={videoImportState.video} />
+          <TimelinePanel
+            timelineState={timelineState}
+            onClipSelected={selectClip}
+            onSelectedClipMoved={moveSelectedClip}
+            onSelectedClipMovedToTrack={moveSelectedClipToTrack}
+            onSelectedClipSplit={splitSelectedClip}
+          />
         </section>
       </section>
     </main>
